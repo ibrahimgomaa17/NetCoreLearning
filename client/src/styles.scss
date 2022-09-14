@@ -1,0 +1,15 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+input{
+    border: none;
+    outline: none;
+
+    &:active &:focus{
+        outline: none;
+    }
+}
+.btn{
+    @apply cursor-pointer transition-all transform hover:brightness-125 filter hover:saturate-100 active:translate-y-px
+}

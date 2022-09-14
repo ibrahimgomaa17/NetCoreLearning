@@ -1,21 +1,26 @@
-<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-    <div class="container">
-        <a class="navbar-brand" href="#">Dating App</a>
-        <ul class="navbar-nav me-auto mb-2 mb-md-0">
-            <li class="nav-item">
-                <a class="nav-link" href="#">Matches</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Lists</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link">Messages</a>
-            </li>
-        </ul>
-        <form #loginForm="ngForm" class="d-flex" role="search" (ngSubmit)="login()" autocomplete="off">
-            <input class="form-control me-2" [(ngModel)]="model.username" name="username" placeholder="Username">
-            <input class="form-control me-2" [(ngModel)]="model.password" name="password" placeholder="Password">
-            <button class="btn btn-outline-success" type="submit">Login</button>
+<div class="flex flex-row justify-center px-10 bg-blue-500">
+    <div class="flex flex-row items-center justify-between h-20  w-full max-w-6xl">
+        <div class="flex flex-row items-center justify-start gap-3">
+            <a class="btn p-1 text-white font-semibold text-2xl">Dating App</a>
+            <ul class="flex flex-row items-center justify-start gap-1" *ngIf="loggedIn">
+                    <a class="btn p-1 text-white font-semibold">Matches</a>
+                    <a class="btn p-1 text-white font-semibold">Lists</a>
+                    <a class="btn p-1 text-white font-semibold">Messages</a>
+                    <a (click)="logout()" class="btn p-1 text-white font-semibold">logout</a>
+            </ul>
+
+        </div>
+        <div class="flex relative" *ngIf="loggedIn">
+            <a class="btn p-1 text-white font-semibold">Welcome user</a>
+            <div class="absolute bg-white z-10 top-10 shadow-sm right-0 rounded p-5">
+                <a  class="btn p-1 text-blue font-normal">Edit Profile</a>
+                <a  class="btn p-1 text-blue font-normal" (click)="logout()">Logout</a>
+            </div>
+        </div>
+        <form *ngIf="!loggedIn" #loginForm="ngForm" class="flex flex-row gap-2 items-center justify-end" role="search" (ngSubmit)="login()" autocomplete="off">
+            <input class="bg-blue-400 rounded leading-9 text-white placeholder-white px-2" [(ngModel)]="model.username" name="username" placeholder="Username">
+            <input class="bg-blue-400 rounded leading-9 text-white placeholder-white px-2" [(ngModel)]="model.password" name="password" placeholder="Password">
+            <button class="text-blue-600 rounded-md p-2 btn cursor-pointer bg-white" type="submit">Login</button>
         </form>
     </div>
-</nav>
+</div>
