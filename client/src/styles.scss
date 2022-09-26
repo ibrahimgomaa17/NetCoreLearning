@@ -11,5 +11,8 @@ input{
     }
 }
 .btn{
-    @apply cursor-pointer transition-all transform hover:brightness-125 filter hover:saturate-100 active:translate-y-px
+    @apply cursor-pointer transition-all transform  filter  active:translate-y-px
+}
+.field{
+  @apply  rounded leading-9  px-2;
 }

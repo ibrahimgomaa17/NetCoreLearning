@@ -1,0 +1,13 @@
+<form class="flex flex-col items-center gap-6" #registerForm (ngSubmit)="register()" autocomplete="off">
+    <h2 class="text-blue-400 text-2xl">Sign up</h2>
+    <div class="flex flex-col gap-3">
+        <input type="text" class="field bg-blue-100 text-black" placeholder="Username" [(ngModel)]="model.username" name="username">
+        <input type="text" class="field bg-blue-100 text-black" placeholder="Password" [(ngModel)]="model.password" name="password">
+        <div class="flex flex-row justify-center gap-3">
+
+            <button class="btn bg-blue-600 rounded px-5 leading-10 text-white" type="submit">Submit</button>
+            <button (click)="cancel()" class="btn bg-gray-600 rounded px-5 leading-10 text-white" type="button">cancel</button>
+            
+        </div>
+    </div>
+</form>

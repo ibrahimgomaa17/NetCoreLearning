@@ -1,0 +1,13 @@
+<div class="mt-20 container flex flex-col items-center">
+    <div *ngIf="!registerMode" class="flex flex-col items-center gap-2">
+        <h4 class="text-3xl">Find your match</h4>
+        <p class="text-lg">Come on in to view your matches... all you need to do is sign up!</p>
+        <div class="flex flex-row items-center">
+            <a class="btn leading-10 px-10 rounded bg-blue-500 text-white" (click)="registerMode = true">Register</a>
+            <a class="btn leading-10 px-10 rounded text-blue-500">Learn more</a>
+        </div>
+    </div>
+    <div *ngIf="registerMode" class="flex flex-row justify-center">
+        <app-register (cancelRegister)="registerMode = false"></app-register>
+    </div>
+</div>
