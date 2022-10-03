@@ -1,11 +1,11 @@
 <div class="flex flex-row justify-center px-10 bg-blue-500">
     <div class="flex flex-row items-center justify-between h-20  w-full max-w-6xl">
         <div class="flex flex-row items-center justify-start gap-3">
-            <a class="btn p-1 text-white font-semibold text-2xl">Dating App</a>
+            <a class="btn p-1 text-white font-semibold text-2xl" routerLink="/">Dating App</a>
             <ul class="flex flex-row items-center justify-start gap-1" *ngIf="accountService.currentUser$|async">
-                    <a class="btn p-1 text-white font-semibold">Matches</a>
-                    <a class="btn p-1 text-white font-semibold">Lists</a>
-                    <a class="btn p-1 text-white font-semibold">Messages</a>
+                    <a class="btn p-1 text-white font-semibold opacity-60" routerLinkActive="opacity-100" routerLink="/members">Matches</a>
+                    <a class="btn p-1 text-white font-semibold opacity-60" routerLinkActive="opacity-100" routerLink="/lists">Lists</a>
+                    <a class="btn p-1 text-white font-semibold opacity-60" routerLinkActive="opacity-100" routerLink="/messages">Messages</a>
             </ul>
 
         </div>
