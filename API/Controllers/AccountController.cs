@@ -8,6 +8,7 @@ using API.Data;
 using API.DTOs;
 using API.Entites;
 using API.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -24,6 +25,8 @@ namespace API.Controllers
             _context = context;
         }
         [HttpPost("register")]
+        [AllowAnonymous]
+
         public async Task<ActionResult<UserDto>> Register(RegisterDto registerDto)
         {
             if (await UserExits(registerDto.UserName)) return BadRequest("Username is taken! ");
@@ -43,6 +46,8 @@ namespace API.Controllers
             };
         }
         [HttpPost("login")]
+        [AllowAnonymous]
+
         public async Task<ActionResult<UserDto>> Loging(LoginDTO loginDTO)
         {
             var user = await _context.Users.SingleOrDefaultAsync(user => user.UserName == loginDTO.Username);

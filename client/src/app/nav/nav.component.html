@@ -2,12 +2,13 @@
     <div class="flex flex-row items-center justify-between h-20  w-full max-w-6xl">
         <div class="flex flex-row items-center justify-start gap-3">
             <a class="btn p-1 text-white font-semibold text-2xl" routerLink="/">Dating App</a>
-            <ul class="flex flex-row items-center justify-start gap-1" *ngIf="accountService.currentUser$|async">
+            <ul class="flex flex-row items-center justify-start gap-1" >
+                <ng-container *ngIf="accountService.currentUser$|async">
                     <a class="btn p-1 text-white font-semibold opacity-60" routerLinkActive="opacity-100" routerLink="/members">Matches</a>
                     <a class="btn p-1 text-white font-semibold opacity-60" routerLinkActive="opacity-100" routerLink="/lists">Lists</a>
                     <a class="btn p-1 text-white font-semibold opacity-60" routerLinkActive="opacity-100" routerLink="/messages">Messages</a>
+                </ng-container>
             </ul>
-
         </div>
         <div class="flex relative" *ngIf="accountService.currentUser$|async">
             <a class="btn p-1 text-white font-semibold" (click)="showNav = !showNav" >Welcome user</a>
