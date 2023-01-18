@@ -1,1 +1,8 @@
-<p>member-list works!</p>
+<h3 class="text-blue-600 text-2xl">Members List:</h3>
+<br>
+<div class="flex flex-row flex-wrap -mr-3 -ml-3">
+    <div *ngFor="let member of members$ | async" class="p-3">
+
+        <app-member-card  [member]="member"></app-member-card>
+    </div>
+</div>

@@ -40,5 +40,9 @@ export class NavComponent implements OnInit {
     this.router.navigateByUrl('/');
     this.showNav = false;
   }
+  logData(x:any){
+    console.log(x); 
+    
+  }
 
 }

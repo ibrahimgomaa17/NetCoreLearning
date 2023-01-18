@@ -10,10 +10,10 @@
                 </ng-container>
             </ul>
         </div>
-        <div class="flex relative" *ngIf="accountService.currentUser$|async">
-            <a class="btn p-1 text-white font-semibold" (click)="showNav = !showNav" >Welcome user</a>
-            <div [ngClass]="showNav?'block':'hidden'" class="absolute divide-y divide-gray-300 bg-white flex flex-col w-max items-stretch gap-1 z-10 top-10 shadow-sm right-0 rounded p-1 border border-gray-400">
-                <a  class="btn px-5 text-blue font-normal rounded leading-10 hover:bg-gray-300">Edit Profile</a>
+        <div  class="flex relative" *ngIf="accountService.currentUser$|async as user">
+            <a class="btn p-1 text-white font-semibold" (click)="logData(user);showNav = !showNav" >Welcome {{user.username}}</a>
+            <div (click)="showNav = false"  [ngClass]="showNav?'block':'hidden'" class="absolute divide-y divide-gray-300 bg-white flex flex-col w-max items-stretch gap-1 z-10 top-10 shadow-sm right-0 rounded p-1 border border-gray-400">
+                <a [routerLink]="['/member/edit']" class="btn px-5 text-blue font-normal rounded leading-10 hover:bg-gray-300">Edit Profile</a>
                 
                 <a  class="btn px-5  text-blue font-normal rounded leading-10 hover:bg-gray-300" (click)="logout()">Logout</a>
             </div>
@@ -21,8 +21,8 @@
         <ng-container></ng-container>
         
         <form *ngIf="!(accountService.currentUser$ | async)" #loginForm="ngForm" class="flex flex-row gap-2 items-center justify-end" role="search" (ngSubmit)="login()" autocomplete="off">
-            <input class="bg-blue-400 field text-white placeholder:text-white" [(ngModel)]="model.username" name="username" placeholder="Username">
-            <input class="bg-blue-400 field text-white placeholder:text-white" [(ngModel)]="model.password" name="password" placeholder="Password">
+            <input class="bg-blue-400 field text-white placeholder:text-white" type="text" [(ngModel)]="model.username" name="username" placeholder="Username">
+            <input class="bg-blue-400 field text-white placeholder:text-white" type="password" [(ngModel)]="model.password" name="password" placeholder="Password">
             <button class="text-blue-600 rounded-md p-2 btn cursor-pointer bg-white" type="submit">Login</button>
         </form>
     </div>
