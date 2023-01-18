@@ -1,0 +1,16 @@
+<div class="flex flex-col items-stretch gap-1 rounded border-gray-200 border group">
+    <div class="flex flex-col">
+        <img class="group-hover:opacity-70" [src]="member?.photoUrl" alt="">
+        <div class="flex flex-row transform -translate-y-5 h-0 left-0 px-2 justify-center gap-2 items-center opacity-0 group-hover:opacity-100 transition-all">
+            <i [routerLink]="'/members/'+ member?.username" class=" btn fa-solid fa-user w-5 h-5 bg-blue-500 text-white leading-5 text-center rounded-sm text-xs"> </i>
+            <i class="fa-solid btn  fa-heart w-5 h-5 bg-blue-500 text-white leading-5 text-center rounded-sm text-xs"> </i>
+            <i class="fa-solid btn  fa-envelope w-5 h-5 bg-blue-500 text-white leading-5 text-center rounded-sm text-xs"> </i>
+
+        </div>
+    </div>
+    <div class="flex justify-center flex-row gap-1 items-center">
+        <i class="far fa-user"></i>
+        <p>{{member?.knownAs}}</p>
+    </div>
+    <p class="text-center font-medium">{{member?.city}}</p>
+</div>

@@ -1,0 +1,11 @@
+<div class="flex flex-row gap-2">
+    <div (click)="indexClick(n)" class="cursor-pointer" *ngFor="let tab of tabs; let n = index">
+        <ng-container *ngIf="button">
+            <ng-container *ngTemplateOutlet="button; context:{$implicit:tab.title, active: tab.active}"></ng-container>
+        </ng-container>
+        <h5 *ngIf="!button">{{tab.title}}</h5>
+    </div>
+</div>
+<div class="flex flex-col pt-5 border-t  border-gray-300">
+    <ng-content></ng-content>
+</div>

@@ -1,0 +1,82 @@
+<div class="flex flex-row gap-5" *ngIf="member">
+    <div class="flex flex-col w-1/4 rounded items-stretch gap-3 border border-gray-300 h-full">
+        <img [src]="member.photoUrl || '/assets/user.png'" [alt]="member.knownAs">
+
+        <!-- details -->
+        <div class="p-3 flex flex-col gap-5">
+            <div>
+                <strong>location:</strong>
+                <p>{{member.city}}, {{member.country}}</p>
+            </div>
+            <div>
+                <strong>Age:</strong>
+                <p>{{member.age}}</p>
+            </div>
+            <div>
+                <strong>Last active:</strong>
+                <p>{{member.lastActive}}</p>
+            </div>
+            <div>
+                <strong>Member since:</strong>
+                <p>{{member.created}}</p>
+            </div>
+        </div>
+        <hr>
+        <div class="flex flex-row justify-center px-3 pb-3">
+            <div class="flex flex-row rounded overflow-hidden w-full">
+                <button [disabled]="!editForm.dirty" form="editForm" type="submit"  [ngClass]="!editForm.dirty?'opacity-70':''" class="text-center w-full h-10 leading-10 block text-white bg-green-500">Save changes</button>
+            </div>
+        </div>
+    </div>
+    <div class="flex flex-col w-3/4 gap-4 pb-20">
+        <h5 class="text-2xl">Your Profile:</h5>
+
+        <div *ngIf="editForm.dirty" class="flex flex-row gap-2 border rounded bg-amber-400 px-5 py-2">
+            <strong>Information:</strong> you have made changes. Any unsaved changes will be lost.
+        </div>
+        <tabs>
+            <ng-template #button let-title let-active="active">
+                <a [ngClass]="active?'text-gray-400  border-gray-300 border-b border-b-white':'text-blue-600 border-transparent'"
+                    class="px-5 leading-10 block border-t border-r border-l translate-y-px rounded-sm transform  z-10 bg-white">{{title}}</a>
+            </ng-template>
+
+            <tab [title]="'About'+ member.knownAs" [active]="true">
+                <form id="editForm" #editForm="ngForm" (ngSubmit)="updateMember()">
+
+
+                    <div class="flex flex-col items-stretch">
+                        <h2 class="font-medium pb-2">Description:</h2>
+                        <textarea [(ngModel)]="member.introduction" name="introduction" rows="6"></textarea>
+                        <br>
+                        <h2 class="font-medium pb-2">Looking for:</h2>
+                        <textarea [(ngModel)]="member.lookingFor" name="lookingFor" rows="6"></textarea>
+                        <br>
+                        <h2 class="font-medium pb-2">Interests:</h2>
+                        <textarea [(ngModel)]="member.interests" name="interests" rows="6"></textarea>
+
+                        <br>
+                        <h2 class="font-medium pb-2">Location Details:</h2>
+                        <div class="flex flex-row items-center">
+                            <div class="flex flex-row gap-1 items-center w-1/2">
+                                <h3>City:</h3>
+                                <input [(ngModel)]="member.city" name="city" type="text">
+                            </div>
+
+                            <div class="flex flex-row gap-1 items-center w-1/2">
+                                <h3>Country:</h3>
+                                <input [(ngModel)]="member.country" name="country" type="text">
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </tab>
+
+            <tab title="Edit Photos">
+
+            </tab>
+
+        </tabs>
+
+
+    </div>
+</div>
