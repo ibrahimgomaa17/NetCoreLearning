@@ -20,6 +20,7 @@ import { NgxGalleryModule } from '@kolkov/ngx-gallery';
 import { MemberEditComponent } from './members/member-edit/member-edit.component';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { LoadingInterceptor } from './_interceptors/loading.interceptor';
+import { PhotoEditorComponent } from './members/photo-editor/photo-editor.component';
 @NgModule({
     declarations: [
         AppComponent,
@@ -31,7 +32,8 @@ import { LoadingInterceptor } from './_interceptors/loading.interceptor';
         ListsComponent,
         MessagesComponent,
         MemberCardComponent,
-        MemberEditComponent
+        MemberEditComponent,
+        PhotoEditorComponent
     ],
     providers: [
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

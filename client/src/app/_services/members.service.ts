@@ -28,4 +28,10 @@ export class MembersService {
     
     return this.http.put(this.baseUrl + 'users', member);
   }
+  setMainPhoto(id:number){
+    return this.http.put(this.baseUrl + 'users/set-main-photo/'+ id, id);
+  }
+  deletePhoto(id:number){
+    return this.http.delete(this.baseUrl + 'users/delete-photo/'+ id);
+  }
 }
