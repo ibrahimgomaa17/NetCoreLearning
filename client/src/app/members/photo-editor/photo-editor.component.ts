@@ -45,6 +45,11 @@ export class PhotoEditorComponent implements OnInit {
       if (response) {
         const photo = JSON.parse(response);
         this.member.photos.push(photo);
+        if (photo.isMain) {
+          this.member.photoUrl = photo.url;
+          this.user.photoUrl = photo.url;
+          this.accountService.setCurrentUser(this.user);
+        }
       }
     }
   }
@@ -71,14 +76,16 @@ export class PhotoEditorComponent implements OnInit {
       this.toastr.error("must leave at least on photo");
     }
     this.memberService.deletePhoto(id).pipe(take(1)).subscribe(x => {
-      let photo = this.member.photos.filter(m => m.id == id)
-      if (photo[0].isMain) {
+      let photo = this.member.photos.filter(m => m.id == id)[0];
+      if (photo.isMain) {
+        let index = this.member.photos.indexOf(photo);
+        this.member.photos.splice(index, 1)
         this.member.photos[0].isMain = true;
+        this.member.photoUrl = this.member.photos[0].url;
         this.user.photoUrl = this.member.photos[0].url;
         this.accountService.setCurrentUser(this.user);
       }
-      let index = this.member.photos.indexOf(photo[0]);
-      this.member.photos.splice(index, 1)
+
     });
   }
 }

@@ -75,8 +75,9 @@ namespace API.Controllers
         {
             var user = await userRepository.GetUserByUsernameAsync(User.GetUsername());
             var currentMain = user.Photos.FirstOrDefault(x => x.IsMain);
-            if (currentMain.IsMain)
+            if (currentMain != null){
                 currentMain.IsMain = false;
+            }
             var mainPhoto = user.Photos.FirstOrDefault(x => x.Id == photoId);
             if (!mainPhoto.IsMain)
             {
@@ -97,6 +98,10 @@ namespace API.Controllers
             if (photo != null)
             {
                 user.Photos.Remove(photo);
+                if(photo.IsMain){
+                    var newMain = user.Photos.First();
+                    newMain.IsMain = true;
+                }
                 if (await userRepository.saveAllAsync())
                     return NoContent();
             }

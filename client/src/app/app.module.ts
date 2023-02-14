@@ -1,11 +1,11 @@
 import { NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import {HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http'
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http'
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NavComponent } from './nav/nav.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HomeComponent } from './home/home.component';
 import { RegisterComponent } from './register/register.component';
 import { MemberListComponent } from './members/member-list/member-list.component';
@@ -21,6 +21,7 @@ import { MemberEditComponent } from './members/member-edit/member-edit.component
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { LoadingInterceptor } from './_interceptors/loading.interceptor';
 import { PhotoEditorComponent } from './members/photo-editor/photo-editor.component';
+import { TextInputComponent } from './_forms/text-input/text-input.component';
 @NgModule({
     declarations: [
         AppComponent,
@@ -33,13 +34,14 @@ import { PhotoEditorComponent } from './members/photo-editor/photo-editor.compon
         MessagesComponent,
         MemberCardComponent,
         MemberEditComponent,
-        PhotoEditorComponent
+        PhotoEditorComponent,
+        TextInputComponent
     ],
     providers: [
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
         { provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true }
     ],
-    schemas:[NO_ERRORS_SCHEMA],
+    schemas: [NO_ERRORS_SCHEMA],
     bootstrap: [AppComponent],
     imports: [
         BrowserModule,
@@ -49,7 +51,8 @@ import { PhotoEditorComponent } from './members/photo-editor/photo-editor.compon
         FormsModule,
         SharedModule,
         NgxGalleryModule,
-        NgxSpinnerModule
+        NgxSpinnerModule, 
+        ReactiveFormsModule
     ]
 })
 export class AppModule { }

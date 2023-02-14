@@ -12,7 +12,7 @@
         </div>
         <div  class="flex relative" *ngIf="accountService.currentUser$|async as user">
             <a class="btn p-1 text-white font-semibold flex flex-row items-center gap-1.5" (click)="logData(user);showNav = !showNav" >
-                <img [src]="user.photoUrl" class="w-10 h-10 object-center rounded-full" alt="">
+                <img [src]="user.photoUrl|| 'assets/user.png'" class="w-10 h-10 object-center rounded-full" alt="">
                 Welcome {{user.username}}
             </a>
             <div (click)="showNav = false"  [ngClass]="showNav?'block':'hidden'" class="absolute divide-y divide-gray-300 bg-white flex flex-col w-max items-stretch gap-1 z-10 top-10 shadow-sm right-0 rounded p-1 border border-gray-400">

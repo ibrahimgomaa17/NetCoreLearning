@@ -1,0 +1,11 @@
+<div class="flex flex-col gap-1" *ngIf="ngControl.control">
+    <h5 class="text-xs opacity-70 first-letter:uppercase">{{label}}</h5>
+    <input class="form-control w-80" type="{{type}}" [formControl]="ngControl.control" >
+    <div class="text-xs text-red-600" *ngIf="ngControl.touched"> 
+        <h5 *ngIf="ngControl.control.errors?.required">{{label}} is required</h5>
+        <h5 *ngIf="ngControl.control.errors?.minlength">{{label}} must be at least {{ngControl.control.errors?.minlength['requiredLength']}}</h5>
+        <h5 *ngIf="ngControl.control.errors?.maxlength">{{label}} must be at most {{ngControl.control.errors?.maxlength['requiredLength']}}</h5>
+    
+        <h5 *ngIf="ngControl.control.errors?.matchingError">Passwords do not match</h5>
+    </div>
+</div>
