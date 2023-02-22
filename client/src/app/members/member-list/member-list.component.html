@@ -1,8 +1,17 @@
 <h3 class="text-blue-600 text-2xl">Members List:</h3>
 <br>
 <div class="flex flex-row flex-wrap -mr-3 -ml-3">
-    <div *ngFor="let member of members$ | async" class="p-3">
-
+    <div *ngFor="let member of members" class="p-3">
         <app-member-card  [member]="member"></app-member-card>
     </div>
 </div>
+<mat-paginator #paginator
+               class="demo-paginator"
+               (page)="handlePageEvent($event)"
+               [length]="pagination?.totalItems"
+               [pageSize]="pagination?.itemsPerPage"
+               [pageSizeOptions]="[]"
+               [hidePageSize]="true"
+               [pageIndex]="pagination?.currentPage -1"
+               aria-label="Select page">
+</mat-paginator>

@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using API.DTOs;
 using API.Entites;
 using API.Extensions;
+using API.Helpers;
 using API.Interfaces;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
@@ -27,9 +28,12 @@ namespace API.Controllers
             this.photoService = photoService;
         }
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<MemberDto>>> GetUsers()
+        public async Task<ActionResult<IEnumerable<MemberDto>>> GetUsers([FromQuery]UserParams userParams)
         {
-            return Ok(await userRepository.GetMembersAsync());
+            var users = await userRepository.GetMembersAsync(userParams);
+            Response.AddPaginationHeader(users.CurrentPage,users.PageSize,users.TotalCount,users.TotalPages);
+
+            return Ok(users);
         }
 
         [HttpGet("{username}", Name = "GetUser")]
@@ -75,7 +79,8 @@ namespace API.Controllers
         {
             var user = await userRepository.GetUserByUsernameAsync(User.GetUsername());
             var currentMain = user.Photos.FirstOrDefault(x => x.IsMain);
-            if (currentMain != null){
+            if (currentMain != null)
+            {
                 currentMain.IsMain = false;
             }
             var mainPhoto = user.Photos.FirstOrDefault(x => x.Id == photoId);
@@ -98,14 +103,15 @@ namespace API.Controllers
             if (photo != null)
             {
                 user.Photos.Remove(photo);
-                if(photo.IsMain){
+                if (photo.IsMain)
+                {
                     var newMain = user.Photos.First();
                     newMain.IsMain = true;
                 }
                 if (await userRepository.saveAllAsync())
                     return NoContent();
             }
-             return BadRequest("Photo does not exit!");
+            return BadRequest("Photo does not exit!");
         }
     }
 }

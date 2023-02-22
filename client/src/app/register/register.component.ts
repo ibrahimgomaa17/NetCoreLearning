@@ -10,7 +10,7 @@ import { AccountService } from '../_services/account.service';
   styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent implements OnInit {
-
+  username: any;
   constructor(private accountService:AccountService,private toastr: ToastrService, private fb:FormBuilder, private router:Router) { }
   @Output() cancelRegister = new EventEmitter();
   ngOnInit(): void {

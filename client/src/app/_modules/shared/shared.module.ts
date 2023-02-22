@@ -4,6 +4,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { TabsComponent } from './tabs/tabs.component';
 import { TabComponent } from './tab/tab.component';
 import { FileUploadModule } from 'ng2-file-upload';
+import {MatPaginatorModule} from '@angular/material/paginator';
 
 
 
@@ -17,13 +18,17 @@ import { FileUploadModule } from 'ng2-file-upload';
     ToastrModule.forRoot({
       positionClass:'toast-bottom-right'
     }),
-    FileUploadModule
+    FileUploadModule,
+    MatPaginatorModule
+
   ],
   exports:[
     ToastrModule,
     TabsComponent,  
     TabComponent,
-    FileUploadModule
+    FileUploadModule,
+    MatPaginatorModule
+
   ]
 })
 export class SharedModule { }

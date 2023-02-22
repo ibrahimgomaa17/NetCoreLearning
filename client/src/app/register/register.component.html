@@ -1,4 +1,4 @@
-<form class="flex flex-col items-center gap-6 -mt-10 pb-10" [formGroup]="registerForm" (ngSubmit)="registerForm.valid && register()" autocomplete="off">
+<form class="flex flex-col items-center gap-6 -mt-10 pb-10"  [formGroup]="registerForm" (ngSubmit)="registerForm.valid && register()" autocomplete="off">
     <h2 class="text-blue-400 text-2xl">Sign up</h2>
     <div class="flex flex-col gap-3" *ngIf="registerForm.controls as controls">
         <div class="flex flex-row items-center gap-1.5">
@@ -7,7 +7,7 @@
           <label for="female">Female<input  id="female" type="radio" formControlName="gender" value="female"></label>
           
         </div>
-        <text-input label="Username" [formControl]="controls.username"></text-input>
+        <text-input  label="Username" [formControl]="controls.username"></text-input>
         <text-input label="dateOfBirth" type="date" [formControl]="controls.dateOfBirth"></text-input>
         <text-input label="knownAs" [formControl]="controls.knownAs"></text-input>
         <text-input label="city" [formControl]="controls.city"></text-input>
@@ -23,5 +23,6 @@
             
         </div>
     </div>
+
     <h5 class="text-red-600 text-xs" *ngFor="let error of errorList| keyvalue">{{error.key}}: {{error.value}}</h5>
 </form>
