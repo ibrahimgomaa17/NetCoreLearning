@@ -1,4 +1,4 @@
-import { NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
+import { Injector, NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http'
 import { AppRoutingModule } from './app-routing.module';
@@ -22,7 +22,8 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 import { LoadingInterceptor } from './_interceptors/loading.interceptor';
 import { PhotoEditorComponent } from './members/photo-editor/photo-editor.component';
 import { TextInputComponent } from './_forms/text-input/text-input.component';
-
+import { TimeagoModule } from 'ngx-timeago';
+export let AppInjector: Injector;
 @NgModule({
     declarations: [
         AppComponent,
@@ -52,8 +53,13 @@ import { TextInputComponent } from './_forms/text-input/text-input.component';
         FormsModule,
         SharedModule,
         NgxGalleryModule,
-        NgxSpinnerModule, 
-        ReactiveFormsModule
+        NgxSpinnerModule,
+        ReactiveFormsModule,
+        TimeagoModule.forRoot()
     ]
 })
-export class AppModule { }
+export class AppModule {
+    constructor(private injector: Injector) {
+        AppInjector = this.injector;
+    }
+}

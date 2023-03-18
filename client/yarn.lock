@@ -190,7 +190,7 @@
   dependencies:
     "tslib" "^2.3.0"
 
-"@angular/core@^14.0.0", "@angular/core@^14.0.0 || ^15.0.0", "@angular/core@>=13.0.0 <14", "@angular/core@>=14.0.0-0", "@angular/core@14.0.3":
+"@angular/core@^14.0.0", "@angular/core@^14.0.0 || ^15.0.0", "@angular/core@>=10.0.0", "@angular/core@>=13.0.0 <14", "@angular/core@>=14.0.0-0", "@angular/core@14.0.3":
   "integrity" "sha512-Z71BrEIJuMGm/BdK9Lh8IJwADQqA8qPeUVppCs67CABZdwA3sK0kC+iobauWXcweXU30BdQYc7HyZe2x7rcdmQ=="
   "resolved" "https://registry.npmjs.org/@angular/core/-/core-14.0.3.tgz"
   "version" "14.0.3"
@@ -4427,6 +4427,13 @@
   dependencies:
     "tslib" "^2.3.0"
 
+"ngx-timeago@^2.0.0":
+  "integrity" "sha512-5kQZeTPCkegEcSooUu3W0BSOwvxEt1q6zjodwEOYoW/FxETC8Bk1zQF1QOPZLS+Nu3GLA+g1oPXMVBonM+CYQQ=="
+  "resolved" "https://registry.npmjs.org/ngx-timeago/-/ngx-timeago-2.0.0.tgz"
+  "version" "2.0.0"
+  dependencies:
+    "tslib" "^2.0.0"
+
 "ngx-toastr@^15.1.0":
   "integrity" "sha512-srdxKKf1+B/7z11M4Ty7bnkme2xjdUcnP/t7mNG/2gRM1h0P/7Lbz71FIQHuKZOCdnGdXjsT6OXU0dRvNyrkyg=="
   "resolved" "https://registry.npmjs.org/ngx-toastr/-/ngx-toastr-15.2.2.tgz"
@@ -5514,7 +5521,7 @@
   dependencies:
     "queue-microtask" "^1.2.2"
 
-"rxjs@^6.5.3 || ^7.4.0", "rxjs@^7.5.5", "rxjs@~7.8.0":
+"rxjs@^6.5.3 || ^7.4.0", "rxjs@^7.5.5", "rxjs@>=6.6.0", "rxjs@~7.8.0":
   "integrity" "sha512-F2+gxDshqmIub1KdvZkaEfGDwLNpPvk9Fs6LD/MyQxNgMds/WH9OdDDXOmxUZpME+iSK3rQCctkL0DYyytUqMg=="
   "resolved" "https://registry.npmjs.org/rxjs/-/rxjs-7.8.0.tgz"
   "version" "7.8.0"
@@ -6203,7 +6210,7 @@
   "resolved" "https://registry.npmjs.org/tslib/-/tslib-1.14.1.tgz"
   "version" "1.14.1"
 
-"tslib@^2.1.0", "tslib@^2.3.0", "tslib@2.4.0":
+"tslib@^2.0.0", "tslib@^2.1.0", "tslib@^2.3.0", "tslib@2.4.0":
   "integrity" "sha512-d6xOpEDfsi2CZVlPQzGeux8XMwLT9hssAsaPYExaQMuYskwb+x1x7J371tWlbBdWHroy99KnVB6qIkUbs5X3UQ=="
   "resolved" "https://registry.npmjs.org/tslib/-/tslib-2.4.0.tgz"
   "version" "2.4.0"

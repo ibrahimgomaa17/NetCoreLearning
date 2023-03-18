@@ -1,17 +1,31 @@
 <h3 class="text-blue-600 text-2xl">Members List:</h3>
 <br>
+<h5 class="text-center text-black text-3xl py-3">Your matches {{pagination?.totalItems}} found</h5>
+<div class="flex flex-row items-stretch gap-3">
+    <h5>age from: </h5>
+    <input type="number" name="" id="" [(ngModel)]="userParams.minAge">
+    <h5>age to: </h5>
+    <input type="number" name="" id="" [(ngModel)]="userParams.maxAge">
+    <h5>show: </h5>
+    <select class="border-gray-400 border p-2" name="" id="" [(ngModel)]="userParams.gender">
+        <option value="male">male</option>
+        <option value="female">female</option>
+    </select>
+
+    <a class="btn bg-blue-700 text-white rounded px-3 leading-10" (click)="filter()">filter</a>
+    <a class="btn bg-blue-700 text-white rounded px-3 leading-10" (click)="resetFilter()">reset filter</a>
+</div>
+<div class="flex flex-row items-center justify-end gap-2">
+    <a [ngClass]="userParams.orderBy == 'LastActive'?'bg-blue-700':'bg-gray-700'" class="btn  text-white rounded px-3 leading-10" (click)="userParams.orderBy = 'LastActive'; loadMembers()">Last Active</a>
+    <a [ngClass]="userParams.orderBy == 'Created'?'bg-blue-700':'bg-gray-700'" class="btn text-white rounded px-3 leading-10" (click)="userParams.orderBy = 'Created'; loadMembers()">Newest Members</a>
+
+</div>
 <div class="flex flex-row flex-wrap -mr-3 -ml-3">
     <div *ngFor="let member of members" class="p-3">
-        <app-member-card  [member]="member"></app-member-card>
+        <app-member-card [member]="member"></app-member-card>
     </div>
 </div>
-<mat-paginator #paginator
-               class="demo-paginator"
-               (page)="handlePageEvent($event)"
-               [length]="pagination?.totalItems"
-               [pageSize]="pagination?.itemsPerPage"
-               [pageSizeOptions]="[]"
-               [hidePageSize]="true"
-               [pageIndex]="pagination?.currentPage -1"
-               aria-label="Select page">
+<mat-paginator #paginator class="demo-paginator" (page)="handlePageEvent($event)" [length]="pagination?.totalItems"
+    [pageSize]="pagination?.itemsPerPage" [pageSizeOptions]="[]" [hidePageSize]="true"
+    [pageIndex]="pagination?.currentPage -1" aria-label="Select page">
 </mat-paginator>
