@@ -22,14 +22,14 @@ namespace API.Controllers
         private readonly IMapper mapper;
         private readonly IUserRepository _userRepository;
 
-        public LikesController(IUserRepository userRepository, ILikesRepository likeRepository,IMapper mapper)
+        public LikesController(IUserRepository userRepository, ILikesRepository likeRepository, IMapper mapper)
         {
             this._userRepository = userRepository;
             this._likeRepository = likeRepository;
             this.mapper = mapper;
         }
 
-        [HttpGet("{username}")]
+        [HttpPost("{username}")]
         public async Task<ActionResult> AddLike(string username)
         {
             var sourceUserId = User.GetUserId();
@@ -56,14 +56,18 @@ namespace API.Controllers
         }
 
         [HttpGet]
-        public async Task<JsonResult> GetUserLikes()
+        public async Task<ActionResult<IEnumerable<LikeDto>>> GetUserLikes(string predicate)
         {
-            var user = await _likeRepository.GetUserWithLikes(User.GetUserId());
-            // var users = await _userRepository.GetUsersAsync();
-            
-
-            // var likedusers = users.Where(x=> user.LikedUsers.Where(m=> m.LikedUserId == x.Id).Any());
-            return new JsonResult(user);
+            var users = await _likeRepository.GetUserLikes(predicate, User.GetUserId());
+            return Ok(users);
+        }
+        [HttpGet("user/{userId}")]
+        public async Task<ActionResult> GetUserWithLikes(int userId)
+        {
+            var user = await _likeRepository.GetGivenUserWithLikes(userId);
+            if (user != null)
+                return Ok(user);
+            return BadRequest("Unable to find such user");
         }
     }
 
@@ -72,7 +76,3 @@ namespace API.Controllers
 
 
 
-public class CertainUser : MemberDto
-{
-    ICollection<LikeDto> LikeList {set;get;}
-}

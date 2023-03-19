@@ -3,7 +3,7 @@
         <img class="group-hover:opacity-70 w-52" [src]="member?.photoUrl || 'assets/user.png'" alt="">
         <div class="flex flex-row transform -translate-y-5 h-0 left-0 px-2 justify-center gap-2 items-center opacity-0 group-hover:opacity-100 transition-all">
             <i [routerLink]="'/members/'+ member?.username" class=" btn fa-solid fa-user w-5 h-5 bg-blue-500 text-white leading-5 text-center rounded-sm text-xs"> </i>
-            <i class="fa-solid btn  fa-heart w-5 h-5 bg-blue-500 text-white leading-5 text-center rounded-sm text-xs"> </i>
+            <i (click)="addLike(member)" class="fa-solid btn  fa-heart w-5 h-5 bg-blue-500 text-white leading-5 text-center rounded-sm text-xs"> </i>
             <i class="fa-solid btn  fa-envelope w-5 h-5 bg-blue-500 text-white leading-5 text-center rounded-sm text-xs"> </i>
 
         </div>

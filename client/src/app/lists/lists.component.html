@@ -1,1 +1,16 @@
-<p>lists works!</p>
+<div class="flex flex-row justify-center text-4xl">
+    <h5 *ngIf="predicate == 'liked'">Members I like</h5>
+    <h5 *ngIf="predicate == 'likedBy'">Member who like me</h5>
+</div>
+
+<div class="flex flex-row items-stretch rounded overflow-hidden">
+    <a class="btn h-9 px-5 leading-9 text-white " (click)="fetchMembers('liked')"
+        [ngClass]="predicate == 'liked'?'bg-blue-800':'bg-blue-400'">Members I like</a>
+    <a class="btn h-9 px-5 leading-9 text-white " (click)="fetchMembers('likedBy')"
+        [ngClass]="predicate == 'likedBy'?'bg-blue-800':'bg-blue-400'">Member who like me</a>
+</div>
+<div class="flex flex-wrap flex-row -ml-3 -mr-3">
+    <div class="flex flex-col px-3" *ngFor="let member of members">
+        <app-member-card [member]="member"></app-member-card>
+    </div>
+</div>
