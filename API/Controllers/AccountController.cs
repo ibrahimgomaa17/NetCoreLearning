@@ -44,7 +44,8 @@ namespace API.Controllers
             await _context.SaveChangesAsync();
             return new UserDto
             {
-                Username = user.UserName,   
+                Username = user.UserName,
+                Id = user.Id,
                 Token = _tokenService.CreateToken(user),
                 KnownAs = user.KnownAs,
                 Gender = user.Gender
@@ -67,6 +68,7 @@ namespace API.Controllers
             return new UserDto
             {
                 Username = user.UserName,
+                Id = user.Id,
                 Token = _tokenService.CreateToken(user),
                 photoUrl = user.Photos.FirstOrDefault(x => x.IsMain)?.Url,
                 KnownAs = user.KnownAs,

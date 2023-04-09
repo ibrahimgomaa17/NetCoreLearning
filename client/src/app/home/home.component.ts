@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-
+import { environment } from 'src/environments/environment';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -9,10 +9,13 @@ import { Component, OnInit } from '@angular/core';
 export class HomeComponent implements OnInit {
   registerMode = false;
   users: any;
+  greeting;
   constructor(private http: HttpClient) { }
 
-  ngOnInit(): void {
-  }
+   ngOnInit() {
+
+  }  
+
   registerToggle() {
     this.registerMode = !this.registerMode;
   }

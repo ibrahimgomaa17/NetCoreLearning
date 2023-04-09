@@ -27,6 +27,8 @@ namespace API.Helpers
                 City = x.LikedUser.City,
                 KnownAs = x.LikedUser.KnownAs
             })));
+              CreateMap<AppUser, MemberWithMessages>().ForMember(dest => dest.Messages, options => options.MapFrom(src => src.SentMessages));
+            CreateMap<UserMessage ,MessageDto>();
         }
     }
 }

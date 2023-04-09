@@ -1,0 +1,30 @@
+<div *ngIf="open && otherMember"
+    class="flex flex-col items-stretch fixed bottom-5 right-5 h-96 w-96 bg-white border border-blue-300 rounded p-5 shadow-sm ">
+    <div class="flex flex-row items-center pb-5 justify-between sticky top-0 border-b border-blue-300">
+        <div class="flex flex-row items-center gap-3 ">
+            <i class=" btn fa-solid fa-user w-5 h-5 text-blue-500 leading-5 text-center rounded-sm text-xs"> </i>
+            <h5>{{otherMember.username}}</h5>
+
+        </div>
+        <a class="btn text-red-400" (click)="open = false"> close</a>
+    </div>
+    <div class="block h-72 overflow-scroll">
+        <div class="flex flex-col justify-end items-stretch  gap-1.5 py-5 ">
+            <ng-container *ngFor="let message of messages">
+                <div class="flex flex-row items-center justify-start gap-3" *ngIf="message.senderId != user.id">
+                    <i class=" fa-solid fa-user"></i>
+                    <h5 class="bg-black text-white rounded-r-full rounded-l-full px-2">{{message.message}}</h5>
+                </div>
+                <div class="flex flex-row items-center justify-end" *ngIf="message.senderId == user.id">
+                    <h5 class="bg-blue-800 text-white rounded-r-full rounded-l-full px-2">{{message.message}}</h5>
+                </div>
+            </ng-container>
+        </div>
+    </div>
+
+    <div class="flex flex-row items-center bg-white rounded border border-gray-600 px-2 sticky bottom-0">
+        <input [(ngModel)]="message" (keyup.enter)="sendMessage()" type="text"
+            class="leading-10 w-full text-blue-800 border-0 focus:border-0">
+        <i (click)="sendMessage()" class="fa-solid fa-paper-plane w-9 btn"></i>
+    </div>
+</div>

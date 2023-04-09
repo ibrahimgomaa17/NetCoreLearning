@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { Member } from 'src/app/_models/member';
 import { MembersService } from 'src/app/_services/members.service';
+import { MessageService } from 'src/app/_services/message.service';
 
 @Component({
   selector: 'app-member-card',
@@ -10,7 +11,7 @@ import { MembersService } from 'src/app/_services/members.service';
 })
 export class MemberCardComponent implements OnInit {
 
-  constructor(private memberService:MembersService, private toaster:ToastrService) { }
+  constructor(private memberService:MembersService, private toaster:ToastrService, private messageService:MessageService) { }
   @Input() member:Member | undefined
   ngOnInit(): void {
   }
@@ -22,5 +23,8 @@ export class MemberCardComponent implements OnInit {
       this.toaster.error(error.error);
       
     });
+  }
+  messageMember(){
+    this.messageService.messageMember.next(this.member);
   }
 }
