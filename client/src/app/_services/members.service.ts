@@ -6,16 +6,18 @@ import { LikeParams } from '../_models/likeParams';
 import { Member } from '../_models/member';
 import { PaginatedResult } from '../_models/pagination';
 import { UserParams } from '../_models/userParams';
+import { BaseService } from './base.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class MembersService {
-  baseUrl = environment.apiUrl;
+export class MembersService extends BaseService {
   members: Member[] = [];
   memberCache = new Map();
   userParams:UserParams = new UserParams();
-  constructor(private http: HttpClient) { }
+  constructor() {
+    super();
+  }
   getUserParams(){
     return this.userParams;
   }
@@ -45,28 +47,7 @@ export class MembersService {
     return this.getPaginationResult<Partial<Member[]>>(params, this.baseUrl + 'likes');
   }
 
-  private getPaginationResult<T>(params: HttpParams, url) {
-    const paginatedResult: PaginatedResult<T> = new PaginatedResult<T>();
-
-    return this.http.get<T>(url, { observe: "response", params }).pipe(map(x => {
-      paginatedResult.result = x.body;
-      if (x.headers.get('Pagination') != null)
-        paginatedResult.pagination = JSON.parse(x.headers.get('Pagination'));
-
-      return paginatedResult;
-    }));
-  }
-
-  private getParams(UserParams: UserParams) {
-    let params = new HttpParams();
-    params = params.append("pageNumber", UserParams.pageNumber);
-    params = params.append("pageSize", UserParams.pageSize);
-    params = params.append('minAge', UserParams.minAge);
-    params = params.append('maxAge', UserParams.maxAge);
-    params = params.append('gender', UserParams.gender);
-    params = params.append('orderBy', UserParams.orderBy);
-    return params;
-  }
+ 
 
   getMember(user: string) {
     let member = [...this.memberCache.values()].reduce((x, y) => x.concat(y.result), [])?.find((x: Member) => x.username == user);
