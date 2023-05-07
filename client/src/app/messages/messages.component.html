@@ -1,1 +1,25 @@
-<p>messages works!</p>
+<div class="flex flex-row items-center gap-10">
+    <a (click)="fetchContainer('Unread')"
+        [ngClass]="messageParams.container == 'Unread'?'text-blue-600':'text-black'">unread</a>
+    <a (click)="fetchContainer( 'Inbox')"
+        [ngClass]="messageParams.container == 'Inbox'?'text-blue-600':'text-black'">inbox</a>
+    <a (click)="fetchContainer('Outbox')"
+        [ngClass]="messageParams.container == 'Outbox'?'text-blue-600':'text-black'">outbox</a>
+</div>
+
+<table class="w-full "> 
+    <tr>
+        <th>Message</th>
+        <th>From/To</th>
+        <th>Sent/Received</th>
+        <th></th>
+    </tr>
+    <tr *ngFor="let message of messages">
+        <td>
+            {{message.content}}
+        </td>
+        <td>{{message.recipientUserName}}</td>
+        <td>{{message.messageSent | timeago:live}}</td>
+        <td><a href="" class="">delete</a></td>
+    </tr>
+</table>

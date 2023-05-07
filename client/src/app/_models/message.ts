@@ -10,3 +10,7 @@ export interface Message {
     dateRead?: Date;
     messageSent: Date;
 }
+export interface MessageCreateDto{
+    recipientUsername:string;
+    content:string;
+  }

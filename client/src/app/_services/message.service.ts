@@ -3,7 +3,8 @@ import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { BaseService } from './base.service';
 import { MessageParams } from '../_models/messageParams';
-import { Message } from '../_models/message';
+import { Message, MessageCreateDto } from '../_models/message';
+
 
 @Injectable({
   providedIn: 'root'
@@ -22,5 +23,12 @@ export class MessageService extends BaseService{
     return this.getPaginationResult<Partial<Message[]>>(params, this.baseUrl + 'messages');
   }
 
+  getMessageThread(username:string) {
+    return this.http.get<Partial<Message[]>>(this.baseUrl + 'messages/thread/' + username);
+  }
+
+  sendMessage(createMessage:MessageCreateDto){
+   return this.http.post<Message>(this.baseUrl + 'messages', createMessage);
+  }
 
 }
