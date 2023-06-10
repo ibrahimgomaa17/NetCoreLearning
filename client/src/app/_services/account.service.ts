@@ -15,8 +15,9 @@ export class AccountService {
 
   login(model: any) {
     return this.http.post<User>(this.baseUrl + 'account/login', model).pipe(map((response: User) => {
-      const user = response;
+      const user: any = response;
       if (user) {
+        user.roles = this.getTokenRoles(user.token);
         localStorage.setItem('user', JSON.stringify(user));
         this.currentUserSource.next(user);
       }
@@ -32,8 +33,9 @@ export class AccountService {
   }
 
   register(model: any) {
-    return this.http.post(this.baseUrl  + 'account/register', model).pipe(map((user : any)=>{
-      if(user){
+    return this.http.post(this.baseUrl + 'account/register', model).pipe(map((user: any) => {
+      if (user) {
+        user.roles = this.getTokenRoles(user.token);
         localStorage.setItem('user', JSON.stringify(user));
         this.currentUserSource.next(user);
         console.log(user);
@@ -42,5 +44,9 @@ export class AccountService {
     }))
   }
 
-
+  getTokenRoles(token) {
+    let newToken = JSON.parse(atob(token.split('.')[1]));
+    console.log(newToken);
+    return newToken.role;
+  }
 }

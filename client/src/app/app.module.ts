@@ -23,6 +23,8 @@ import { LoadingInterceptor } from './_interceptors/loading.interceptor';
 import { PhotoEditorComponent } from './members/photo-editor/photo-editor.component';
 import { TextInputComponent } from './_forms/text-input/text-input.component';
 import { TimeagoModule } from 'ngx-timeago';
+import { AdminPanelComponent } from './admin/admin-panel/admin-panel.component';
+import { HasRoleDirective } from './_directives/has-role.directive';
 export let AppInjector: Injector;
 @NgModule({
     declarations: [
@@ -37,7 +39,9 @@ export let AppInjector: Injector;
         MemberCardComponent,
         MemberEditComponent,
         PhotoEditorComponent,
-        TextInputComponent
+        TextInputComponent,
+        AdminPanelComponent,
+        HasRoleDirective
     ],
     providers: [
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

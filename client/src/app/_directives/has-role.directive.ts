@@ -1,0 +1,25 @@
+import { Directive, Input, OnInit, TemplateRef, ViewContainerRef } from '@angular/core';
+import { AccountService } from '../_services/account.service';
+import { take } from 'rxjs';
+import { User } from '../_models/user';
+
+@Directive({
+  selector: '[hasRole]'
+})
+export class HasRoleDirective implements OnInit {
+
+  constructor(private viewContainerRef: ViewContainerRef, private templateRef: TemplateRef<any>, private accountService: AccountService) {
+    this.accountService.currentUser$.pipe(take(1)).subscribe((user) => {
+      this.user = user;
+    })
+  }
+  ngOnInit(): void {
+    if (!this.user.roles || this.user == null)
+      this.viewContainerRef.clear();
+    if (this.user.roles.some(x => this.hasRole.includes(x)))
+      this.viewContainerRef.createEmbeddedView(this.templateRef)
+  }
+  @Input() hasRole: any;
+  user: User
+
+}

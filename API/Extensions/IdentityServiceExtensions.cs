@@ -24,21 +24,45 @@ namespace API.Extensions
                     ValidateIssuer = false,
                     ValidateAudience = false
                 };
+                options.Events = new JwtBearerEvents
+                {
+                    OnMessageReceived = context =>
+                    {
+                        var accessToken = context.Request.Query["access_token"];
+                        var path = context.HttpContext.Request.Path;
+                        if (!string.IsNullOrEmpty(accessToken) || path.StartsWithSegments("/hub"))
+                            context.Token = accessToken;
+
+                        return Task.CompletedTask;
+                    }
+            };
+        });
+
+            services.AddAuthorization(opt=>{
+                opt.AddPolicy("AdminRole", policy =>
+                {
+                    policy.RequireRole("Admin");
+                });
+                   opt.AddPolicy("ModeratorPhotoRole", policy =>
+                {
+                    policy.RequireRole("Admin", "Moderator");
+                });
             });
-            services.AddSwaggerGen(c =>
-         {
-             c.SwaggerDoc("v1", new OpenApiInfo { Title = "API", Version = "v1" });
-             c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
-             {
-                 In = ParameterLocation.Header,
-                 Description = "Please enter a valid token",
-                 Name = "Authorization",
-                 Type = SecuritySchemeType.Http,
-                 BearerFormat = "JWT",
-                 Scheme = "Bearer"
-             });
-             c.AddSecurityRequirement(new OpenApiSecurityRequirement
+
+services.AddSwaggerGen(c =>
+{
+    c.SwaggerDoc("v1", new OpenApiInfo { Title = "API", Version = "v1" });
+    c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
     {
+        In = ParameterLocation.Header,
+        Description = "Please enter a valid token",
+        Name = "Authorization",
+        Type = SecuritySchemeType.Http,
+        BearerFormat = "JWT",
+        Scheme = "Bearer"
+    });
+    c.AddSecurityRequirement(new OpenApiSecurityRequirement
+{
         {
             new OpenApiSecurityScheme
             {
@@ -50,9 +74,9 @@ namespace API.Extensions
             },
             new string[]{}
         }
-    });
-         });
-            return services;
+});
+});
+return services;
         }
     }
 }

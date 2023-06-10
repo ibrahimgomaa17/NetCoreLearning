@@ -3,9 +3,10 @@
         <div class="flex flex-row items-center justify-start gap-3">
             <a class="btn p-1 text-white font-semibold text-2xl" routerLink="/">Dating App</a>
             <ul class="flex flex-row items-center justify-start gap-1" >
-                <ng-container *ngIf="accountService.currentUser$|async">
+                <ng-container *ngIf="accountService.currentUser$|async as user">
                     <a class="btn p-1 text-white font-semibold opacity-60" routerLinkActive="opacity-100" routerLink="/members">Matches</a>
                     <a class="btn p-1 text-white font-semibold opacity-60" routerLinkActive="opacity-100" routerLink="/lists">Lists</a>
+                    <a class="btn p-1 text-white font-semibold opacity-60" routerLinkActive="opacity-100" routerLink="/admin" *hasRole="'[Admin]'">Admin</a>
                     <a class="btn p-1 text-white font-semibold opacity-60" routerLinkActive="opacity-100" routerLink="/messages">Messages</a>
                 </ng-container>
             </ul>

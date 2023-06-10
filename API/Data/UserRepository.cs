@@ -32,9 +32,8 @@ namespace API.Data
 
         public async Task<PagedList<MemberDto>> GetMembersAsync(UserParams userParams)
         {
-
             var query = _context.Users.AsQueryable();
-            query = query.Where(x => x.Gender == userParams.Gender && x.UserName != userParams.CurrentUserName);
+            query = query.Where(x =>( x.Gender == userParams.Gender || userParams.Gender == null) && x.UserName != userParams.CurrentUserName);
             var minDate = DateTime.Today.AddYears(-userParams.MaxAge - 1);
             var maxDate = DateTime.Today.AddYears(-userParams.MinAge);
             query = query.Where(x=> x.DateOfBirth >= minDate && x.DateOfBirth <= maxDate);
